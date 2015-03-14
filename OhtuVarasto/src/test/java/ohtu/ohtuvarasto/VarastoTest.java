@@ -69,10 +69,36 @@ public class VarastoTest {
     public void konstr() {
         varasto = new Varasto(-1);
         varasto = new Varasto(0);
-        varasto = new Varasto(1,1);
-        varasto = new Varasto(1,2);
-        varasto = new Varasto(-1,2);
-        varasto = new Varasto(-1,-1);
+        varasto = new Varasto(1, 1);
+        varasto = new Varasto(1, 2);
+        varasto = new Varasto(-1, 2);
+        varasto = new Varasto(-1, -1);
         varasto.toString();
+    }
+
+    @Test
+    public void tayteenEiVoiLisata() {
+        varasto.lisaaVarastoon(varasto.paljonkoMahtuu());
+        varasto.lisaaVarastoon(1);
+        assertTrue(varasto.getSaldo() == varasto.getTilavuus());
+    }
+
+    @Test
+    public void tyhjastaEiVoiPoistaa() {
+        varasto.otaVarastosta(varasto.getSaldo());
+        varasto.otaVarastosta(1);
+        assertTrue(varasto.getSaldo() == 0);
+    }
+
+    @Test
+    public void negatiivistaEiVoiLisata() {
+        varasto.lisaaVarastoon(-1);
+        assertTrue(varasto.getSaldo() == 0);
+    }
+
+    @Test
+    public void negatiivistaEiVoiOttaa() {
+        varasto.otaVarastosta(-1);
+        assertTrue(varasto.getSaldo() == 0);
     }
 }
